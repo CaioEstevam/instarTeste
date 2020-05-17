@@ -3,13 +3,19 @@
 
 require_once ("config.php");
 
+$root = new Codigo();
 
-$sql = new sql();
+$root->loadbyId(2);
+
+echo $root;
+
+
+/*$sql = new sql();
 
 $contatos = $sql->select("SELECT * FROM tb_contatos");
 
 
-echo json_encode($contatos);
+echo json_encode($contatos);*/
 
 
  ?>
