@@ -26,7 +26,7 @@ class sql extends PDO{
 
 		$stmt = $this->conn->prepare($rawQuery);
 
-		$this->setParams($stmt, $params);
+		$this->setParams($stmt, $params, $rawQuery);
 
 		$stmt->execute();
 

@@ -120,22 +120,9 @@ class Contatos{
 			":ID"=>$id
 		));
 
-		if (count($results) > 0){
-
-			$row = $results[0];
-
-			$this->setCodigo($row['codigo']);
-			$this->setCategoriasCodigo($row['categorias_codigo']);
-			$this->setNome($row['nome']);
-			$this->setEmail($row['email']);
-			$this->setEndereco($row['endereco']);
-			$this->setTelefone($row['telefone']);
-			$this->setCelular($row['celular']);
-			$this->setEstado($row['estado']);
-			$this->setFoto($row['foto']);
-			$this->setDataNascimento(new DateTime($row['data_nascimento']));
-			$this->setObservacoes($row['observacoes']);
+		if (count($results) > 0) {
 			
+			$this->setData($results[0]);
 
 		}
 	}
@@ -144,20 +131,104 @@ class Contatos{
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_contatos ORDER BY nome;");
+		return $sql->select("SELECT * FROM tb_contatos ORDER BY codigo;");
 	}
 
 	public static function search ($login){
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_contatos WHERE nome LIKE :SEARCH ORDER BY nome", array(
+		return $sql->select("SELECT * FROM tb_contatos WHERE nome LIKE :SEARCH ORDER BY codigo", array(
 				':SEARCH'=>"%" .$login. "%"
 		));
 	}
 
+	public function setData($data){
+
+		$this->setCodigo($data['codigo']);
+		$this->setCategoriasCodigo($data['categorias_codigo']);
+		$this->setNome($data['nome']);
+		$this->setEmail($data['email']);
+		$this->setEndereco($data['endereco']);
+		$this->setTelefone($data['telefone']);
+		$this->setCelular($data['celular']);
+		$this->setCidade($data['cidade']);
+		$this->setEstado($data['estado']);
+		$this->setFoto($data['foto']);
+		$this->setDataNascimento(new DateTime($data['data_nascimento']));
+		$this->setObservacoes($data['observacoes']);
+
+
+	}
+
+	public function insert(){
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_contatos_insert(:CATEGORIAS_CODIGOS, :NOME, :EMAIL, :ENDERECO, :TELEFONE, :CELULAR, :CIDADE, :ESTADO, :FOTO, :DATA_NASCIMENTO, :OBSERVACOES)",array(
+
+			':CATEGORIAS_CODIGOS'=>$this->getCategoriasCodigo(),
+			':NOME'=>$this->getNome(),
+			':EMAIL'=>$this->getEmail(), 
+			':ENDERECO'=>$this->getEndereco(),
+			':TELEFONE'=>$this->getTelefone(),
+			':CELULAR'=>$this->getCelular(),
+			':CIDADE'=>$this->getCidade(),
+			':ESTADO'=>$this->getEstado(),
+			':FOTO'=>$this->getFoto(),
+			':DATA_NASCIMENTO'=>$this->getDataNascimento(),
+			':OBSERVACOES'=>$this->getObservacoes()
+
+		));
+
+		if (count($results) > 0){
+
+			$this->setData($results[0]);
+		}
+
+	}
+
+	public function update($categoriasCodigo,$nome, $email, $endereco, $telefone, $celular, $cidade, $estado, $foto, $dataNascimento, $observacoes){
+
+		$this->setCategoriasCodigo($categoriasCodigo);
+		$this->setNome($nome);
+		$this->setEmail($email);
+		$this->setEndereco($endereco);
+		$this->setTelefone($telefone);
+		$this->setCelular($celular);
+		$this->setCidade($cidade);
+		$this->setEstado($estado);
+		$this->setFoto($foto);
+		$this->setDataNascimento($dataNascimento);
+		$this->setObservacoes($observacoes);
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_contatos SET categorias_codigo = :CATEGORIAS_CODIGO, nome = :NOME, email = :EMAIL, endereco = :ENDERECO, telefone = :TELEFONE,
+		celular = :CELULAR, cidade = :CIDADE, estado = :ESTADO, foto = :FOTO, data_nascimento = :DATA_NASCIMENTO, observacoes = :OBSERVACOES WHERE codigo = :CODIGO",array(
+
+				
+			':CATEGORIAS_CODIGO'=>$this->getCategoriasCodigo(),
+			':NOME'=>$this->getNome(),
+			':EMAIL'=>$this->getEmail(),
+			':ENDERECO'=>$this->getEndereco(),
+			':TELEFONE'=>$this->getTelefone(),
+			':CELULAR'=>$this->getCelular(),
+			':CIDADE'=>$this->getCidade(),
+			':ESTADO'=>$this->getEstado(),
+			':FOTO'=>$this->getFoto(),
+			':DATA_NASCIMENTO'=>$this->getDataNascimento(),
+			':OBSERVACOES'=>$this->getObservacoes(),
+			':CODIGO'=>$this->getCodigo()
+
+			
+
+		));
+
+	}
+
+
 	public function __toString(){
 
-		return json_encode(array(
+			return json_encode(array(
 			"codigo"=>$this->getCodigo(),
 			"categorias_codigo"=>$this->getCategoriasCodigo(),
 			"nome"=>$this->getNome(),
@@ -167,14 +238,16 @@ class Contatos{
 			"celular"=>$this->getCelular(),
 			"estado"=>$this->getEstado(),
 			"foto"=>$this->getFoto(),
-			"dataNascimento"=>$this->getDataNascimento() -> format("d/m/Y"),
+			"dataNascimento"=>$this->getDataNascimento(),
 			"observacoes"=>$this->getObservacoes()
 
 
 
 		));
-	}
+		}
+	
 }
+
 
 
  ?>
