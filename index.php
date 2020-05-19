@@ -32,15 +32,12 @@ $cadastro->setDataNascimento("");
 $cadastro->setObservacoes("Amigo da Kurama e pai do Boruto");
 
 
-
-
-
-
 $cadastro->insert();
 
-echo $cadastro;*/
+echo $cadastro;
+============================================================================================*/
 
-//UPDATE
+//UPDATE=====================================================================================
 
 /*$editar = new Contatos();
 
@@ -48,14 +45,22 @@ $editar->loadById(2);
 
 $editar->update(1006,"Jabiraka", "jabiraka@baranga.com.br", "rua 13", "5555-1010", "99881-3578", "Parksville", "ZV", "foto top", "2012-11-11", "Teste Final");*/
 
+//DELETE =====================================================================================
+
+/*$apagar = new Contatos();
+
+$apagar->loadbyId(2);
+
+$apagar->delete();
+
+echo $apagar;*/
 
 
-
-
-/*$sql = new sql();
+/* SELECT  ==================================================================================
+$sql = new sql();
 $contatos = $sql->select("SELECT * FROM tb_contatos");
-echo json_encode($contatos);*/
-
+echo json_encode($contatos);
+============================================================================================*/
 
 
 echo "---> ".filter_input(INPUT_GET, "nome");
@@ -184,3 +189,4 @@ $lista = contatos::getList();
  
  </body>
  </html>
+ 

@@ -225,6 +225,33 @@ class Contatos{
 
 	}
 
+	public function delete(){
+
+		$sql  = new Sql();
+
+		$sql->query("DELETE FROM tb_contatos WHERE codigo = :CODIGO",array(
+
+			':CODIGO'=>$this->getCodigo()
+
+		));
+
+		
+		$this->setCategoriasCodigo(0);
+		$this->setNome("");
+		$this->setEmail("");
+		$this->setEndereco("");
+		$this->setTelefone("");
+		$this->setCelular("");
+		$this->setCidade("");
+		$this->setEstado("");
+		$this->setFoto("");
+		$this->setDataNascimento("");
+		$this->setObservacoes("");
+		$this->setCodigo(0);
+
+
+	}
+
 
 	public function __toString(){
 
