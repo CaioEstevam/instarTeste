@@ -3,6 +3,20 @@
 
 require_once ("config.php");
 
+require_once("vendor/autoload.php");
+
+$app = new \Slim\Slim();
+
+$app->config('debug', true);
+
+$app->get('/', function() {
+    
+	
+
+});
+
+$app->run();
+
 //Carrega apenas 1
 //$root = new Contatos();
 //$root->loadbyId(1);
@@ -63,7 +77,7 @@ echo json_encode($contatos);
 ============================================================================================*/
 
 
-echo "---> ".filter_input(INPUT_GET, "nome");
+
 
 $contatos = new contatos();
 

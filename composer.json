@@ -1,0 +1,10 @@
+{
+	"require":{
+		"rain/raintpl": ">=3.0.0",
+		"phpmailer/phpmailer": "~6.1",
+		"slim/slim":"2.0"
+	}
+}
+
+
+
