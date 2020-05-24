@@ -31,9 +31,47 @@ $cadastro->setObservacoes($observacoes);
 
 $cadastro->insert();
 
-if($cadastro != "0")
-	echo "Cadastro realizado com sucesso!";
-else
-	echo "Erro ao realizar cadastro!";
+
 
 ?>
+
+
+<!DOCTYPE html>
+ <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro Instar</title>
+    <link rel="stylesheet"href="CSS\normalize.css">
+    <link rel="stylesheet"href="CSS\style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <a href="index.php" class="logo">Instar</a>
+         <nav class="menu-principal">
+                    <ul class="menu-principal__lista">
+                    <li><a class="menu-principal__item menu-principal__item--atual" href="index.php">Home</a></li>
+                    <li><a class="menu-principal__item" href="cadastro.php">Cadastro</a></li>
+                    <li><a class="menu-principal__item" href="lista.php">Registro</a></li>
+                </ul>
+        </nav>
+    </header>
+
+
+
+
+<h1>
+	<?php 
+
+	if($cadastro != "0")
+
+		echo "Cadastro realizado com sucesso!";
+	else
+		echo "Erro ao realizar cadastro!";
+
+	 ?>
+	
+
+</h1>
+</html>
