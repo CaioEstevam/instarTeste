@@ -72,7 +72,7 @@ $lista = contatos::getList();
 <option value="Partnership"></option>
 </select></label>
 
-<label for="observacoes"><span>Message <span class="required">*</span></span><textarea name="observacoes" class="textarea-field" id= "observacoes" value="<?php echo $lista[0]['observacoes']; ?>" ></textarea></label>
+<label for="observacoes"><span>Observações <span class="required">*</span></span><textarea name="observacoes" class="textarea-field" id= "observacoes" value="<?php echo $lista[0]['observacoes']; ?>" ></textarea></label>
 
 <label><span> </span><input type="submit" value="Enviar" /></label>
 </form>
